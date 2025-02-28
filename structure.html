@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="authoring-tool" content="Adobe_Animate_CC">
+<title>Установка</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<link rel="stylesheet" href="style/theory.css"> 
+<link rel="stylesheet" href="style/structure.css"> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+<script src="ustanovka.js"></script>
+<script>
+var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+function init() {
+	canvas = document.getElementById("canvas");
+	anim_container = document.getElementById("animation_container");
+	dom_overlay_container = document.getElementById("dom_overlay_container");
+	var comp=AdobeAn.getComposition("2B95482E2CABDD459D230505868B16D9");
+	var lib=comp.getLibrary();
+	var loader = new createjs.LoadQueue(false);
+	loader.installPlugin(createjs.Sound);
+	loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp)});
+	loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
+	var lib=comp.getLibrary();
+	loader.loadManifest(lib.properties.manifest);
+}
+function handleFileLoad(evt, comp) {
+	var images=comp.getImages();	
+	if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }	
+}
+
+function handleComplete(evt,comp) {
+	var lib=comp.getLibrary();
+	var ss=comp.getSpriteSheet();
+	var queue = evt.target;
+	var ssMetadata = lib.ssMetadata;
+	for(i=0; i<ssMetadata.length; i++) {
+		ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
+	}
+	exportRoot = new lib.ustanovka();
+	stage = new lib.Stage(canvas);
+	stage.enableMouseOver();	
+	fnStartAnimation = function() {
+		stage.addChild(exportRoot);
+		createjs.Ticker.framerate = lib.properties.fps;
+		createjs.Ticker.addEventListener("tick", stage);
+	}	    
+	AdobeAn.makeResponsive(false,'both',false,1,[canvas,anim_container,dom_overlay_container]);	
+	AdobeAn.compositionLoaded(lib.properties.id);
+	fnStartAnimation();
+}
+
+function playSound(id, loop, offset) {
+	return createjs.Sound.play(id, {'interrupt':createjs.Sound.INTERRUPT_EARLY, 'loop': loop, 'offset': offset});}
+
+</script>
+<header>
+	<div class="container">
+		<div class="logo">ЭКСПЛУАТАЦИЯ ФРИТЮРНИЦЫ</div>
+		<nav>
+			<ul>
+				<li><a href="index.html">Главная страница</a></li>
+				<li><a href="menu.html">Меню</a></li>
+			</ul>
+		</nav>
+	</div>
+</header>
+</head>
+<body onload="init();" style="margin:0px;">
+<h2 class="top">Фото установки</h2>
+        <section class="center">
+            <div class="slider-container">
+                <div class="slides">
+                    <img src="images\first-image.jpg" alt="" class="img active">
+                    <img src="images\second-image.jpg" class="img" alt="">
+                    <img src="images\third-image.jpg" class="img" alt="">
+                </div>
+                <div class="slider-buttons">
+                    <span class="next">&#10230;</span>
+                    <span class="prev">&#10229;</span>
+                </div>
+            </div>
+        </section>
+        <section class="text-div">
+
+        <h2>Основные элементы установки</h2>
+		<p>
+			Фритюрница – это бытовое электрическое устройство, предназначенное для приготовления различных продуктов во фритюре.
+		</p>
+    	<ul>
+        	<li id="element1" style="margin:0px;">Смотровое окно</li>
+        	<li id="element2" style="margin:0px;">Крышка</li>
+        	<li id="element3" style="margin:0px;">Внутренняя поверхность крышки</li>
+        	<li id="element4" style="margin:0px;">Корпус</li>
+        	<li id="element5" style="margin:0px;">Клавиша открывания крышки</li>
+        	<li id="element6" style="margin:0px;">Регулятор температуры «MIN-130-150-170-190»</li>
+        	<li id="element7" style="margin:0px;">Ручка установки времени оповещения «5-10-15-20-25-30»</li>
+        	<li id="element8" style="margin:0px;">Ручка корзины</li>
+        	<li id="element9" style="margin:0px;">Фиксатор ручки</li>
+        	<li id="element10" style="margin:0px;">Корзина для продуктов</li>
+        	<li id="element11" style="margin:0px;">Решётка для выхода пара/фильтр</li>
+        	<li id="element12" style="margin:0px;">Фиксатор решётки</li>
+        	<li id="element13" style="margin:0px;">Вилка сетевого шнура</li>
+        	<li id="element14" style="margin:0px;">Отсек для хранения сетевого шнура</li>
+        	<li id="element15" style="margin:0px;">Индикатор включения в сеть «ВКЛЮЧЕНИЕ»</li>
+        	<li id="element16" style="margin:0px;">Индикатор разогрева фритюра «НАГРЕВ»</li>
+        	<li id="element17" style="margin:0px;">Нагревательный элемент</li>
+        	<li id="element18" style="margin:0px;">Кнопка включения термопредохранителя «RESTART»</li>
+        	<li id="element19" style="margin:0px;">Контактная группа</li>
+    	</ul>
+    	<!-- <div id="image-display">
+    		<img id="img1" src="images/img1.jpg" alt="-">
+    		<img id="img2" src="images/img2.jpg" alt="-">
+      		<img id="img3" src="images/img3.jpg" alt="-">
+    		<img id="img4" src="images/img4.jpg" alt="-">
+       		<img id="img5" src="images/img5.jpg" alt="-">
+       		<img id="img6" src="images/img6.jpg" alt="-">
+       		<img id="img7" src="images/img7.jpg" alt="-">
+   		</div> -->
+    <h2>Подробное описание установки</h2>
+    <p>На рисунке показана схема установки для исследования поляризации света. На оптической скамье 1 размещены: 
+        источник света 2 (полупроводниковый лазер), который через блок питания 3 подключается в сеть; анализатор-поляроид 4, 
+        заключенный в оправу, способную вращаться вокруг луча лазера (угол поворота численно равен углу поворота плоскости 
+        пропускания анализатора и измеряется по шкале, нанесенной на оправе); фотоэлемент 5, соединенный с микроамперметром 6 
+        (сила фототока, измеряемая микроамперметром, пропорциональна интенсивности света, выходящего из анализатора).</p>
+    
+    </div>
+    <p>Для получения эллиптически поляризованного света на оптической скамье дополнительно размещают закрепленный в рамке 
+        деформируемый с помощью винта 7 образец 8, соединенный с тензометрическим датчиком 9. Цифровые показания тока 
+        разбалансировки <i>&Delta;i</i>, регистрируемые датчиком, пропорциональны величине механического напряжения 
+        <i>&sigma;</i> в образце.</p>
+
+    <figure class="centreimg">
+        <img width="100%" src="images\ustanovka.jpg" alt="График" onmousedown="this.width=this.width+100">
+    </figure>
+
+	<h2>Карта установки</h2>
+	<div id="animation_container" style="background-color:rgba(255, 255, 255, 1.00); width:1280px; height:720px">
+
+	</div>
+	<h2>Анимационный ролик</h2>
+	<video width="100%" height="100%" controls>
+		<source src="" type="video/mp4">
+	  </video>
+	<script src="script/structure.js"></script>
+</body>
+</html>
